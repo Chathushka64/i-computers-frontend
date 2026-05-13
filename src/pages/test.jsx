@@ -1,4 +1,6 @@
 import { useState } from "react"
+import toast from "react-hot-toast"
+import { FaTwitter } from "react-icons/fa"
 
 export default function TestPage(){
 
@@ -8,8 +10,6 @@ export default function TestPage(){
 
     //let score = 50
 
-    
-
     return(
         <div className="w-full h-full bg-green-400 flex justify-center items-center">
             <div className="w-[450px] h-[450px]  bg-white flex justify-center items-center flex-col">
@@ -18,7 +18,7 @@ export default function TestPage(){
                     <button className="w-[100px] bg-red-600 h-[40px] mx-5"
                         onClick={
                             ()=>{
-                                // score = 49
+
                                 setScore(score - 1)
                             }
                         }>
@@ -34,8 +34,51 @@ export default function TestPage(){
                             }
                         }>
                         Increase
-                    </button> 
-                </div>               
+                    </button>
+                </div> 
+                    
+                <h1 className="font-bold text-7xl">{mood}</h1>
+                <div className="w-full h-[100px] flex justify-center items-center flex-row">
+                    <button className="w-[100px] bg-red-600 h-[40px] mx-5"
+                        onClick={
+                            ()=>{
+                                toast.error("You are sad now!")
+                                setMood("😢")
+                            }
+                        }>
+                        Sad
+                    </button>
+                    <button className="w-[100px] bg-green-600 h-[40px] mx-5"
+                        onClick={
+                            ()=>{
+                                toast("You are neutral now!",{
+                                    icon: "😐"
+                                })
+                                setMood("😐")
+                            }
+                        }>
+                        Neutral
+                    </button>
+                    <button 
+                        className="w-[100px] bg-blue-600 h-[40px] mx-5"
+                        onClick={
+                            ()=>{
+                                toast.success("You are happy now!")
+                                setMood("😀")
+
+                            }
+                        }>
+                        Happy
+                    </button>
+                </div>
+                <FaTwitter onClick={
+                        ()=>{
+                            toast("Follow us on Twitter",{
+                                icon: <FaTwitter className="text-blue-500"/>
+                            })
+                            setIsFollowed(!isFollowed)
+                        }
+                    } className={isFollowed ? "text-[100px] text-blue-600" : "text-[100px] text-gray-600"}/>               
             </div>
         </div>
     )
